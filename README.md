@@ -42,7 +42,7 @@ JPMorgan-Quant-Projects/
 │   ├── naturalgas.csv
 │── src/
 │   ├── ficoBucketQuant.py
-│   ├── loadmodel.py
+│   ├── loanmodel.py
 │   ├── naturalgas.py
 │   ├── naturalgaspricing.py
 │── .DS_Store  
