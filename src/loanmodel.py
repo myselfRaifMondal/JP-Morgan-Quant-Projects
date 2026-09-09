@@ -1,3 +1,26 @@
+"""Task 3 - Credit risk: probability of default and expected loss (JPMorgan Forage).
+
+Trains a scikit-learn ``LogisticRegression`` (on ``StandardScaler``-scaled
+features, 80/20 train/test split, ``random_state=42``) to predict whether a
+borrower defaults, then exposes:
+
+* ``predict_default_probability(loan_details)`` - probability of default for a
+  single ``[income, loan_amount, credit_score]`` record.
+* ``expected_loss(loan_details, loan_amount)`` - that probability multiplied by
+  the loss given default, assuming a fixed 10% recovery rate.
+
+Input: ``pd.read_csv('loan_data.csv')`` with the columns ``income``,
+``loan_amount``, ``credit_score`` and ``default``. NOTE: that file is not in
+this repository and the path is hard-coded, so the script fails with
+``FileNotFoundError`` as written. The equivalent bundled data is
+``datasets/customerloan.csv``, whose columns are named differently
+(``income``, ``loan_amt_outstanding``, ``fico_score``, ``default``), so the
+path and the column list both have to be edited before it will run.
+
+Output: prints the probability of default and the expected loss for the
+hard-coded sample loan ``[50000, 20000, 700]``.
+"""
+
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split

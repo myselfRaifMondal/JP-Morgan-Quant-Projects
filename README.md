@@ -28,6 +28,17 @@ This repository contains projects completed as part of JPMorgan Chase & Co.’s 
 	
 •	Analyzed creditworthiness and its impact on financial products.
 
+# 🧭 Module → Task Map
+
+| Module | Forage task | Reads | Produces |
+|---|---|---|---|
+| `src/naturalgas.py` | 1 - Investigate and analyze price data | `Nat_Gas.csv` (`Date`, `Price`); bundled equivalent is `datasets/naturalgas.csv`, which uses `Dates`/`Prices` | Price & forecast plots, plus a 12-month Holt-Winters forecast and an `estimate_price(date)` lookup |
+| `src/naturalgaspricing.py` | 2 - Price a commodity storage contract | `Nat_Gas.csv` (`Date`, `Price`); bundled equivalent is `datasets/naturalgas.csv` | Net cash flow of a gas storage contract from injection/withdrawal schedules, rates, max volume and storage cost |
+| `src/loanmodel.py` | 3 - Credit risk analysis | `loan_data.csv` (`income`, `loan_amount`, `credit_score`, `default`); bundled equivalent is `datasets/customerloan.csv`, which uses `loan_amt_outstanding`/`fico_score` | Logistic-regression probability of default and expected loss (10% recovery rate) |
+| `src/ficoBucketQuant.py` | 4 - Bucket FICO scores | Nothing - it generates random scores and default counts in-file | FICO buckets by equal-size/MSE split; the log-likelihood optimiser currently raises `KeyError` (see the module docstring) |
+
+> Note: the scripts have hard-coded input filenames (`Nat_Gas.csv`, `loan_data.csv`) that do not match the files in `datasets/`, and the bundled CSVs use different column names. Update the path and column names before running a script against the bundled data.
+
 # 🛠️ Tech Stack
 	
 •	Python (Pandas, NumPy, Scikit-learn)
@@ -45,7 +56,6 @@ JPMorgan-Quant-Projects/
 │   ├── loanmodel.py
 │   ├── naturalgas.py
 │   ├── naturalgaspricing.py
-│── .DS_Store  
 │── LICENSE
 │── README.md
 ```
