@@ -1,3 +1,34 @@
+"""Task 4 - Bucket FICO scores into ratings (JPMorgan Quantitative Research, Forage).
+
+Provides two ways of splitting a set of FICO scores into ``num_buckets``
+contiguous rating buckets:
+
+* ``mse_bucketization`` - sorts the scores and cuts them into equally sized
+  buckets, returning ``(low_score, high_score, bucket_mean)`` per bucket.
+* ``optimize_log_likelihood`` - intended to start from evenly spaced boundaries
+  between the minimum and maximum score and use ``scipy.optimize.minimize``
+  (Powell) to move the interior boundaries so that the bucket log-likelihood of
+  the observed defaults is maximised, returning the optimised
+  ``(lower_bound, upper_bound)`` pairs.
+
+  KNOWN BUG: it does not currently run. ``optimize_log_likelihood`` passes
+  ``defaults`` keyed by FICO score into ``log_likelihood``, which indexes it by
+  ``(lower_bound, upper_bound)`` bucket tuple, so the first objective
+  evaluation raises ``KeyError``. ``log_likelihood`` expects ``defaults`` and
+  ``total_records`` to be dicts keyed by the same bucket objects it iterates
+  over.
+
+Input: this script does NOT read ``datasets/customerloan.csv``. The block at
+the bottom of the file generates 1000 random FICO scores in [300, 850) with
+``numpy.random.randint`` and a dictionary of random default counts, so results
+differ on every run. To use the real data, feed the ``fico_score`` and
+``default`` columns of ``datasets/customerloan.csv`` into the two functions
+instead.
+
+Output: prints the MSE buckets, then attempts to print the log-likelihood
+buckets - which fails with the ``KeyError`` described above.
+"""
+
 import numpy as np
 import scipy.optimize as opt
 

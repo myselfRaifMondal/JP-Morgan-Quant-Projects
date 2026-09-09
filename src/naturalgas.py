@@ -1,3 +1,24 @@
+"""Task 1 - Investigate and analyse natural gas price data (JPMorgan Forage).
+
+Loads a monthly natural gas price series, plots it, fits a Holt-Winters
+``ExponentialSmoothing`` model (additive trend, additive seasonality,
+``seasonal_periods=12``) and forecasts the next 12 month-end prices. The
+``estimate_price(date)`` helper returns the historical price for a date in the
+input series, the forecast price for a date in the 12-month forecast window,
+and an out-of-range message otherwise - it requires an exact month-end index
+match rather than interpolating.
+
+Input: ``pd.read_csv("Nat_Gas.csv")`` with ``Date`` and ``Price`` columns; the
+path is hard-coded and relative to the working directory. The bundled series is
+``datasets/naturalgas.csv`` (48 monthly observations from 10/31/20), but its
+columns are named ``Dates`` and ``Prices``, so both the filename and the column
+names need updating before the script will run.
+
+Output: two matplotlib figures (price history, and history plus forecast) shown
+interactively, and the estimated price for the hard-coded date ``2025-06-30``
+printed to stdout.
+"""
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

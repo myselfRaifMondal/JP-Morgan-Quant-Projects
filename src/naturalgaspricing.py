@@ -1,3 +1,24 @@
+"""Task 2 - Price a natural gas storage contract (JPMorgan Forage).
+
+``price_contract`` values a simple gas storage deal by walking the given
+injection dates (buying at the market price, limited by ``injection_rate`` and
+the remaining headroom under ``max_volume``) and then the withdrawal dates
+(selling at the market price, limited by ``withdrawal_rate`` and the inventory
+on hand), and finally subtracting ``storage_cost * max_volume``. Dates missing
+from the price index are skipped, and the model ignores discounting and any
+injection/withdrawal fees.
+
+Input: ``load_gas_data(file_path)`` reads a CSV with a ``Date`` column (parsed
+as the index) and a ``Price`` column. The example call at the bottom uses the
+hard-coded path ``"Nat_Gas.csv"``, which is not in this repository. The bundled
+series is ``datasets/naturalgas.csv``, whose columns are ``Dates`` and
+``Prices``, so the path and the column names must be adjusted before running.
+
+Output: prints the total contract value (net cash flow) for the hard-coded
+example - two injections in Jan/Feb 2023, two withdrawals in Jun/Jul 2023,
+rates of 1000 units, ``max_volume`` 5000 and ``storage_cost`` 10 per unit.
+"""
+
 import pandas as pd
 from datetime import datetime
 
